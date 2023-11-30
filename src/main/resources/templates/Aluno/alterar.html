@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>+ Alterar Aluno</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+
+    <meta name="author" content="Maria Fernanda">
+
+    <script src="/webjars/jquery/3.5.1/jquery.min.css" defer></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js" defer></script>
+    <script src="/js/main.js" defer></script>
+
+</head>
+<body>
+
+    <!-- Header -->
+    <div th:replace="~{fragmentos/fragmentos :: cabecalho}"></div>
+
+    <h4>Alterar Aluno</h4>
+
+    <form method="post" action="/alterar" th:object="${aluno}">
+
+        <input type="hidden" th:field="*{id}">
+
+        <label for="nome">Nome do aluno</label>
+        <input type="text" th:field="*{nome}" id="nome">
+        <br>
+        <label for="curso">Selecione o curso</label>
+        <select name="curso" th:field="*{curso}" id="curso" >   
+            <option th:each="cursos : ${T(br.com.gerenciaAlunos.Enums.Curso).values()}" th:value="${cursos}" th:text="${cursos}"></option>
+        </select>
+        <br>
+        <label for="matricula">Gerar matricula</label>
+        <input readonly type="text" th:field="*{matricula}" id="matricula">
+        <button disabled type="button" class="btn btn-dark" onclick="GerarMatricula()">Gerar</button>
+        <br>
+        <label for="status">Selecione o status</label>
+        <select name="status" th:field="*{status}" id="status" >   
+            <option th:each="status : ${T(br.com.gerenciaAlunos.Enums.Status).values()}" th:value="${status}" th:text="${status}"></option>
+        </select>
+
+        <br>
+
+        <label for="status">Selecione o turno</label>
+        <select name="turno" th:field="*{turno}" id="turno" >   
+            <option th:each="turno : ${T(br.com.gerenciaAlunos.Enums.Turno).values()}" th:value="${turno}" th:text="${turno}"></option>
+        </select>
+        <br>
+        <button type="submit" class="btn btn-success">Salvar</button>
+    </form>
+
+    <!-- FOOTER -->
+    <div th:replace="~{fragmentos/fragmentos :: rodape}"></div>
+    
+</body>
+</html>
